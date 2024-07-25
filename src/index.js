@@ -3,11 +3,25 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import ThemeProvider from './utils/ContextProvider';
+import { configureStore } from '@reduxjs/toolkit';
+import userReducer from './utils/user';
+import { Provider } from 'react-redux';
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const store = configureStore({
+  reducer: {
+    user:userReducer
+  }
+})
+
 root.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ThemeProvider>
   </React.StrictMode>
 );
 
